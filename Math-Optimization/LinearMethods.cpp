@@ -49,7 +49,7 @@ double goldenSectionSearch(double(*fncPtr)(double), double a, double b, double e
 }
 
 double fibonacciSearch(double(*fncPtr)(double), double a, double b, double eps){
-	double fib[3] = { 1, 2, 3 };	
+	double fib[3] = { 1, 1, 2 };	
 	double x1, x2;
 	double Ln = (b - a) / eps;
 

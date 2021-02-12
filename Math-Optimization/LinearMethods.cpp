@@ -1,5 +1,6 @@
 #include "LinearMethods.h"
-#include <iostream>
+
+
 double dichotomySearch(double (*fncPtr)(double), double a, double b, double eps) {
 	double x, y1, y2;
 	
@@ -16,21 +17,18 @@ double dichotomySearch(double (*fncPtr)(double), double a, double b, double eps)
 		}
 		
 	}
-
 	return (b + a) / 2;
 }
 
-double goldenSectionSearch(double(*fncPtr)(double), double a, double b, double eps)
-{
+double goldenSectionSearch(double(*fncPtr)(double), double a, double b, double eps){
 	double goldenNumber = (pow(5, 0.5) + 1) / 2;
 	double x1, x2, y1, y2;
 	
 	x1 = b - (b - a) / goldenNumber;
 	x2 = a + (b - a) / goldenNumber;
-	
 	y1 = fncPtr(x1);
 	y2 = fncPtr(x2);
-	//std::cout << a << " " << b << std::endl;
+
 	while (b - a > eps) {
 		if (y1 < y2) {
 			a = x1;
@@ -46,16 +44,16 @@ double goldenSectionSearch(double(*fncPtr)(double), double a, double b, double e
 			x1 = b - (b - a)/goldenNumber;
 			y1 = fncPtr(x1);
 		}
-		//std::cout << a << " " << b << std::endl;
+
 	}
 	return (a + b) / 2;
 }
 
-double fibonacciSearch(double(*fncPtr)(double), double a, double b, double eps)
-{
+double fibonacciSearch(double(*fncPtr)(double), double a, double b, double eps){
 	double fib[3] = { 1, 2, 3 };	
 	double x1, x2;
 	double Ln = (b - a) / eps;
+
 	while (fib[2] < Ln) {
 		x1 = a + fib[0] / fib[2] * (b - a);
 		x2 = a + fib[1] / fib[2] * (b - a);

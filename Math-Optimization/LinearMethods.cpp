@@ -15,7 +15,6 @@ double dichotomySearch(double (*fncPtr)(double), double a, double b, double eps)
 		else {
 			a = x;
 		}
-		
 	}
 	return (b + a) / 2;
 }

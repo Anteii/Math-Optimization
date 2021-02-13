@@ -9,7 +9,8 @@ using namespace std;
 
 // Function to inspect
 double testFunc(double x) {
-	return sin(pow(x, 2)) + pow(x, -45) + x;
+	//return sin(pow(x, 2)) + pow(x, -45) + x;
+	return x * x;
 }
 
 int main() {

@@ -30,7 +30,7 @@ double* gauss_zeidel_optimization(double(*fncPtr)(double*, size_t), double* x0, 
 		// counter up
 		++i;
 		if (i == n) i = 0;
-	} while (L2norm(x_cur, x_prev, n) > eps);
+	} while (L2distance(x_cur, x_prev, n) > eps);
 
 	delete[] x_prev;
 	delete[] lambdas;

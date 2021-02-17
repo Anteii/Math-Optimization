@@ -3,7 +3,7 @@
 #include <iomanip>
 #include "LinearMethods.h"
 #include "MultidimensionalOptimizationMethods.h"
-
+#include "GradientMethods.h"
 
 #define PI 3.14159265358979323846
 
@@ -17,7 +17,8 @@ double test_func_1(double x) {
 
 double test_func_2(double* x, size_t n) {
 	//return x[0]*x[0]*4 + x[1]*x[1]*2;
-	return x[0] * x[0] + 1.7 * x[1] * x[1] + 2 * x[0] - 1.5 * x[1] + 0.1 * x[0] * x[1];
+	//return x[0] * x[0] + 1.7 * x[1] * x[1] + 2 * x[0] - 1.5 * x[1] + 0.1 * x[0] * x[1];
+	return sin(x[0]) + x[1] * x[1];
 }
 void linear_methods_test() {
 	double maxX, maxY;
@@ -46,7 +47,7 @@ void linear_methods_test() {
 	cout << maxX << " " << maxY << endl;
 }
 
-void gauss_zeidel_test() {
+void test_gauss_zeidel() {
 	size_t n = 2;
 	double vec0[2] = { 0.5, 5 };
 	double eps = 0.0001;
@@ -62,7 +63,25 @@ void gauss_zeidel_test() {
 	cout << ") f(X)=" << min << endl;
 	delete[] x_vec;
 }
+
+void test_gradient_method() {
+	size_t n = 2;
+	double vec0[2] = { 0.5, 5 };
+	double eps = 0.0001;
+
+	double* x_vec = gradient_method_optimization(test_func_2, vec0, n, eps);
+	double min = test_func_2(x_vec, 2);
+
+	cout << "Gradient method optimization" << endl;
+	cout << "X(";
+	for (size_t i = 0; i < n; ++i) {
+		cout << x_vec[i] << (i == n - 1 ? "" : "; ");
+	}
+	cout << ") f(X)=" << min << endl;
+	delete[] x_vec;
+}
 int main() {
-	gauss_zeidel_test();
+	test_gauss_zeidel();
+	test_gradient_method();
 	return 0;
 }

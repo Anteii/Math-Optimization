@@ -1,7 +1,7 @@
 #include "LinearMethods.h"
 
 
-double dichotomySearch(double (*fncPtr)(double), double a, double b, double eps) {
+double dichotomy_max_search(double (*fncPtr)(double), double a, double b, double eps) {
 	double x, y1, y2;
 	
 	while (b - a > eps) {
@@ -19,7 +19,7 @@ double dichotomySearch(double (*fncPtr)(double), double a, double b, double eps)
 	return (b + a) / 2;
 }
 
-double goldenSectionSearch(double(*fncPtr)(double), double a, double b, double eps){
+double golden_section_max_search(double(*fncPtr)(double), double a, double b, double eps){
 	double goldenNumber = (pow(5, 0.5) + 1) / 2;
 	double x1, x2, y1, y2;
 	
@@ -48,7 +48,7 @@ double goldenSectionSearch(double(*fncPtr)(double), double a, double b, double e
 	return (a + b) / 2;
 }
 
-double fibonacciSearch(double(*fncPtr)(double), double a, double b, double eps){
+double fibonacci_max_search(double(*fncPtr)(double), double a, double b, double eps){
 	double fib[3] = { 1, 2, 3 };
 	double x1, x2;
 	double Ln = (b - a) / eps;
@@ -69,4 +69,35 @@ double fibonacciSearch(double(*fncPtr)(double), double a, double b, double eps){
 		fib[2] = fib[0] + fib[1];
 	}
 	return (a + b) / 2;
+}
+
+/*
+	fncPtr - function pointer
+	v - value vector
+	k - optimizing argument position
+	n - v dimension
+	a - left interval point
+	b - right interval point
+	eps - precision
+*/
+double dichotomy_min_search(double (*fncPtr)(double*, size_t n), double* v, size_t k, size_t n, double a, double b, double eps) {
+
+	double x, y1, y2;
+
+	while (b - a > eps) {
+		x = (b + a) / 2;
+		v[k] += x;
+		v[k] -= eps / 2;
+		y1 = fncPtr(v, n);
+		v[k] += eps;
+		y2 = fncPtr(v, n);
+		v[k] -= eps / 2 + x;
+		if (y1 < y2) {
+			b = x;
+		}
+		else {
+			a = x;
+		}
+	}
+	return (b + a) / 2;
 }

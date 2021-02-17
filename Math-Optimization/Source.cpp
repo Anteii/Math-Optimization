@@ -2,24 +2,26 @@
 #include <cmath>
 #include <iomanip>
 #include "LinearMethods.h"
+#include "MultidimensionalOptimizationMethods.h"
+
 
 #define PI 3.14159265358979323846
 
 using namespace std;
 
 // Function to inspect
-double testFunc(double x) {
+double test_func_1(double x) {
 	//return sin(pow(x, 2)) + pow(x, -45) + x;
 	return x * x;
 }
 
-int main() {
+double test_func_2(double* x, size_t n) {
+	//return x[0]*x[0]*4 + x[1]*x[1]*2;
+	return x[0] * x[0] + 1.7 * x[1] * x[1] + 2 * x[0] - 1.5 * x[1] + 0.1 * x[0] * x[1];
+}
+void linear_methods_test() {
 	double maxX, maxY;
-	/*
-	a - left point
-	b - right point
-	eps - precision
-	*/
+
 	double a = 2;
 	double b = 6;
 	double eps = 1e-9;
@@ -27,21 +29,40 @@ int main() {
 	// to beautify output
 	cout << setprecision(7);
 	cout << "                          Xmax     Ymax" << endl;
-	
+
 	cout << "Dichotomy search       ";
-	maxX = dichotomySearch(testFunc, a, b, eps);
-	maxY = testFunc(maxX);
+	maxX = dichotomy_max_search(test_func_1, a, b, eps);
+	maxY = test_func_1(maxX);
 	cout << maxX << " " << maxY << endl;
 
 	cout << "Golden section search  ";
-	maxX = goldenSectionSearch(testFunc, a, b, eps);
-	maxY = testFunc(maxX);
+	maxX = golden_section_max_search(test_func_1, a, b, eps);
+	maxY = test_func_1(maxX);
 	cout << maxX << " " << maxY << endl;
 
 	cout << "Fibonacci search       ";
-	maxX = fibonacciSearch(testFunc, a, b, eps);
-	maxY = testFunc(maxX);
+	maxX = fibonacci_max_search(test_func_1, a, b, eps);
+	maxY = test_func_1(maxX);
 	cout << maxX << " " << maxY << endl;
+}
 
+void gauss_zeidel_test() {
+	size_t n = 2;
+	double vec0[2] = { 0.5, 5 };
+	double eps = 0.0001;
+
+	double* x_vec = gauss_zeidel_optimization(test_func_2, vec0, n, eps);
+	double min = test_func_2(x_vec, 2);
+
+	cout << "MD optimization" << endl;
+	cout << "(";
+	for (size_t i = 0; i < n; ++i) {
+		cout << x_vec[i] << (i == n - 1 ? "" : "; ");
+	}
+	cout << ") " << min << endl;
+	delete[] x_vec;
+}
+int main() {
+	gauss_zeidel_test();
 	return 0;
 }

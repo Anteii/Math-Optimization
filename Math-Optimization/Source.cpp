@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iomanip>
 #include "LinearMethods.h"
-#include "MultidimensionalOptimizationMethods.h"
+#include "NonGradientMethods.h"
 #include "GradientMethods.h"
 
 #define PI 3.14159265358979323846

@@ -8,7 +8,7 @@ double* gauss_zeidel_optimization(double(*fncPtr)(double*, size_t), double* x0, 
 	double* x_prev = new double[n];
 	double* x_cur = new double[n];
 	double* lambdas = new double[n];
-	double delta = 1;
+	double delta;
 
 	for (size_t j = 0; j < n; ++j) {
 		x_prev[j] = x0[j];
@@ -18,6 +18,7 @@ double* gauss_zeidel_optimization(double(*fncPtr)(double*, size_t), double* x0, 
 	int i = 0;
 	do {
 		x_prev[i] = x_cur[i];
+		delta = x_prev[i]/2 + 1;
 
 		lambdas[i] = dichotomy_min_search(fncPtr, x_prev, i, n, -delta, delta, eps);
 		

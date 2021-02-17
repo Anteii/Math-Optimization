@@ -123,12 +123,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GradientMethods.cpp" />
     <ClCompile Include="LinearMethods.cpp" />
     <ClCompile Include="MultidimensionalOptimizationMethods.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GradientMethods.h" />
     <ClInclude Include="LinearMethods.h" />
     <ClInclude Include="MultidimensionalOptimizationMethods.h" />
     <ClInclude Include="util.h" />

@@ -10,9 +10,12 @@ double* gauss_zeidel_optimization(double(*fncPtr)(double*, size_t), double* x0, 
 	double* lambdas = new double[n];
 	double delta;
 
-	for (size_t j = 0; j < n; ++j) {
-		x_prev[j] = x0[j];
-		x_cur[j] = x0[j];
+	for (size_t i = 0; i < n; ++i) {
+		lambdas[i] = 0;
+	}
+	for (size_t i = 0; i < n; ++i) {
+		x_prev[i] = x0[i];
+		x_cur[i] = x0[i];
 	}
 
 	int i = 0;

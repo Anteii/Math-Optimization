@@ -55,11 +55,11 @@ void gauss_zeidel_test() {
 	double min = test_func_2(x_vec, 2);
 
 	cout << "MD optimization" << endl;
-	cout << "(";
+	cout << "X(";
 	for (size_t i = 0; i < n; ++i) {
 		cout << x_vec[i] << (i == n - 1 ? "" : "; ");
 	}
-	cout << ") " << min << endl;
+	cout << ") f(X)=" << min << endl;
 	delete[] x_vec;
 }
 int main() {

@@ -98,3 +98,43 @@ double* numerical_gradient(double (*fncPtr)(double*, size_t n), double* v, size_
 	}
 	return grad;
 }
+
+double calc_mixed_derivative(double(*fncPtr)(double*, size_t n), double* v, size_t k1, size_t k2, size_t n) {
+	double* nv = new double[n];
+	double* y = new double[4];
+	double h1 = 1e-5, h2 = 1e-5;
+
+	for (int i = 0; i < n; i++) nv[i] = v[i];
+
+	nv[k1] += h1;
+	nv[k2] += h2;
+	y[0] = fncPtr(nv, n);
+
+	nv[k2] -= 2 * h2;
+	y[1] = fncPtr(nv, n);
+
+	nv[k1] -= 2*h1;
+	nv[k2] += 2*h2;
+	y[2] = fncPtr(nv, n);
+
+	nv[k2] -= 2 * h2;
+	y[3] = fncPtr(nv, n);
+	return (y[0] - y[1] - y[2] + y[3]) / (4 * h1 * h2);
+}
+
+double** calc_hessian(double(*fncPtr)(double*, size_t n), double* v, size_t k, size_t n)
+{
+	double** hessian = new double* [n];
+	for (int i = 0; i < n; i++)
+	{
+		hessian[i] = new double[n];
+		for (int j = i; i < n; i++)
+		{
+			hessian[i][j] = calc_mixed_derivative(fncPtr, v, i, i, n);
+			hessian[j][i] = hessian[i][j];
+		}
+
+	}
+	return hessian;
+}
+

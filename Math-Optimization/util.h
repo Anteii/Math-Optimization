@@ -11,3 +11,7 @@ double L2distance(double* vec1, double* vec2, size_t size);
 double numerical_differentiation(double (*fncPtr)(double), double x);
 double numerical_differentiation(double (*fncPtr)(double*, size_t n), double* v, size_t k, size_t n);
 double* numerical_gradient(double (*fncPtr)(double*, size_t n), double* v, size_t n);
+
+double calc_mixed_derivative(double(*fncPtr)(double*, size_t n), double* v, size_t k1, size_t k2, size_t n);
+
+double** hessian(double (*fncPtr)(double*, size_t n), double* v, size_t k, size_t n);

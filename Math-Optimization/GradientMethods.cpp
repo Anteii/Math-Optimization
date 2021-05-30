@@ -1,3 +1,4 @@
+#pragma once
 #include "GradientMethods.h"
 #include "LinearMethods.h"
 #include "util.h"
